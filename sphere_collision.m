@@ -6,5 +6,4 @@ if (rA + rB) < T_length
 else
     flag = true;
 end
-
 end
