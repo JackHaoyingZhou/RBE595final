@@ -3,10 +3,6 @@ close all
 clc
 
 load('test1.mat');
-% v_A = [vertices_A; vertices_A(1,:)];
-% v_B = [vertices_B; vertices_B(1,:)];
-% num_A = size(vertices_A,1);
-% num_B = size(vertices_B,1);
 
 tStart = tic;
 time = 100;
@@ -51,7 +47,7 @@ tMul = sum(T)
 tEnd = toc(tStart)
 
 %%%%%% write frames to file
-writerObj = VideoWriter('test2.avi');
-open(writerObj);
-writeVideo(writerObj, F)
-close(writerObj);
+% writerObj = VideoWriter('test2.avi');
+% open(writerObj);
+% writeVideo(writerObj, F)
+% close(writerObj);

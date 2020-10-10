@@ -1,15 +1,22 @@
-prompt = 'Please input the number of vertices: \n';
-num = input(prompt);
-%num = 6;
-[x,y,dt] = simple_polygon(num);
-vertices = [x';y'];
-%polygon_plot(vertices,'b')
+% prompt = 'Please input the number of vertices: \n';
+% num = input(prompt);
+% %num = 6;
+% [x,y,dt] = simple_polygon(num);
+% vertices = [x';y'];
+% %polygon_plot(vertices,'b')
+% 
+% figure(1)
+% plot(x,y)
+% 
+% hold on;
 
-figure(1)
-plot(x,y)
+mod = py.importlib.import_module('mymod');
 
-hold on;
-
+l0 = [0,1;0,2];
+l1 = [0,1;0,6];
+flag = mod.is_intersected(l0,l1);
+flag1 = logical(flag.data)
+% isequal(flag, 0)
 %%%%%%%%% viscircles(center,radius);
 
 %%%%%% how to plot

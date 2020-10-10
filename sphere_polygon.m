@@ -15,9 +15,9 @@ if sphere_collision(c_A,c_B,r_A,r_B)
                 point_3 = vertices_A(i_treeA,:);
                 point_4 = vertices_A(i_treeA+1,:);
                 [c_ssphere2,r_ssphere2] = build_sphere(point_3,point_4);
-                tic 
-                flag1 = sphere_collision(c_ssphere1,c_ssphere2,r_ssphere1,r_ssphere2);
-                toc
+                %tic 
+                %flag1 = sphere_collision(c_ssphere1,c_ssphere2,r_ssphere1,r_ssphere2);
+                %toc
                 if sphere_collision(c_ssphere1,c_ssphere2,r_ssphere1,r_ssphere2)
                     viscircles(c_ssphere1,r_ssphere1,'color','r');
                     viscircles(c_ssphere2,r_ssphere2,'color','r');
