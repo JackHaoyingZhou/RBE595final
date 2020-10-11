@@ -23,7 +23,7 @@ for t = 1:time
     else
         txt = 'collision: false';
     end
-    text(0,2,txt)
+    text(0.0,2.5,txt)
     %%%%%%% plot
 %     if sphere_collision(c_A,c_B,r_A,r_B)
 %         color = 'r';
@@ -34,10 +34,9 @@ for t = 1:time
 %     viscircles(c_B,r_B,'color',color);
     
     % guarantee consistent height
-    xlim([-1,2.5]);
-    ylim([-1,2.5]);
+    xlim([-2.0,3.0]);
+    ylim([-2.0,3.0]);
     vertices_B = vertices_B + [0.01,0.01];
-%     c_B(2) = c_B(2) + 0.01;
     % capture it
     hold off;
     F(t) = getframe;
