@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-load('test2.mat');
+load('test1.mat');
 
 tStart = tic;
 time = 100;

@@ -10,7 +10,7 @@
 % 
 % hold on;
 
-mod = py.importlib.import_module('mymod');
+mod = py.importlib.import_module('linesegment_collision');
 
 l0 = [0,1;0,2];
 l1 = [0,1;0,6];

@@ -1,4 +1,4 @@
-function [rec,rec_plot] = build_AABB(pointA, pointB)
+function [rec,rec_plot] = build_OBB(pointA, pointB)
 tol = 1e-9;
 if norm(pointA - pointB) < tol
     disp('error!')
