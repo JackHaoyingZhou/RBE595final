@@ -12,8 +12,10 @@ tStart = tic;
 time = 100;
 figure(1)
 T = zeros(1,time);
+theta = 2*pi/time;
+R = [cos(theta),-sin(theta);sin(theta),cos(theta)];
 for t = 1:time
-    %tic
+    tic
     plot(vertices_A(:,1),vertices_A(:,2),'b','Linewidth',2);  % plot
     hold on;
     grid on;
@@ -38,14 +40,16 @@ for t = 1:time
 %     viscircles(c_B,r_B,'color',color);
     
     % guarantee consistent height
-    xlim([-1,2.5]);
-    ylim([-1,2.5]);
-    vertices_B = vertices_B + [0.01,0.01];
+    xlim([-2.0,3.0]);
+    ylim([-2.0,3.0]);
+    %vertices_B = vertices_B + [0.05,0.05];
+    vertices_B = (R*(vertices_B'))';
+    %vertices_B = vertices_B + [0.01,0.01];
 %     c_B(2) = c_B(2) + 0.01;
     % capture it
     hold off;
     F(t) = getframe;
-    %T(t) = toc;
+    T(t) = toc;
 end
 tMul = sum(T)
 tEnd = toc(tStart)

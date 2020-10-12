@@ -1,8 +1,8 @@
 function [rec,rec_plot] = build_AABB(pointA, pointB)
-if isequal(pointA,pointB)
+tol = 1e-9;
+if norm(pointA - pointB) < tol
     disp('error!')
 end
-tol = 1e-6;
 rec = zeros(4,2);
 rec_plot = zeros(5,2);
 point_matrix = [pointA;pointB];
