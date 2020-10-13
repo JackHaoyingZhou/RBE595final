@@ -1,6 +1,6 @@
 function [rec,rec_plot] = build_AABB(pointA, pointB)
 tol = 1e-9;
-if norm(pointA - pointB) < tol
+if isequal(pointA,pointB)
     disp('error!')
 end
 rec = zeros(4,2);

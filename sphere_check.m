@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-load('test1.mat');
+load('test3.mat');
 % v_A = [vertices_A; vertices_A(1,:)];
 % v_B = [vertices_B; vertices_B(1,:)];
 % num_A = size(vertices_A,1);
@@ -42,10 +42,17 @@ for t = 1:time
     % guarantee consistent height
     xlim([-2.0,3.0]);
     ylim([-2.0,3.0]);
-    %vertices_B = vertices_B + [0.05,0.05];
-    vertices_B = (R*(vertices_B'))';
-    %vertices_B = vertices_B + [0.01,0.01];
-%     c_B(2) = c_B(2) + 0.01;
+    %%%%translation
+    vertices_B = vertices_B + [0.01,0.01];
+    
+    
+    %%%%%%% rotation around specific point
+    %vertices_B = vertices_B - [0.8,0.8];
+    %vertices_B = (R*(vertices_B'))'+[0.8,0.8];
+    
+    
+    %%%%%% rotation around origin
+    %vertices_B = (R*(vertices_B'))'
     % capture it
     hold off;
     F(t) = getframe;

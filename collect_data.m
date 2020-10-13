@@ -2,8 +2,8 @@ clear all
 close all
 clc
 
-num_A = 6;
-num_B = 6;
+num_A = 160;
+num_B = 260;
 
 [x_A,y_A,dt_A] = simple_polygon(num_A);
 vertices_A = [x_A,y_A];
@@ -15,4 +15,4 @@ hold on;
 grid on;
 plot(vertices_B(:,1),vertices_B(:,2),'k','Linewidth',2);
 
-save('test3','num_A','num_B','vertices_A','vertices_B')
+save('test4','num_A','num_B','vertices_A','vertices_B')
