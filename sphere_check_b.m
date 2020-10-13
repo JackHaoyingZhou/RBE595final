@@ -3,15 +3,18 @@ close all
 clc
 
 load('test1.mat');
-
-%vertices_B = vertices_B + [0.01,0.01];
+vertices_B = vertices_B - [0.5,0.5];
+% v_A = [vertices_A; vertices_A(1,:)];
+% v_B = [vertices_B; vertices_B(1,:)];
+% num_A = size(vertices_A,1);
+% num_B = size(vertices_B,1);
 
 tStart = tic;
 time = 100;
-theta = 2*pi/time;
-R = [cos(theta),-sin(theta);sin(theta),cos(theta)];
 figure(1)
 T = zeros(1,time);
+theta = 2*pi/time;
+R = [cos(theta),-sin(theta);sin(theta),cos(theta)];
 for t = 1:time
     tic
     plot(vertices_A(:,1),vertices_A(:,2),'b','Linewidth',2);  % plot
@@ -19,48 +22,42 @@ for t = 1:time
     grid on;
     plot(vertices_B(:,1),vertices_B(:,2),'k','Linewidth',2);
     
-    [rec_A_total,rec_A_plot_total] = build_OBB(vertices_A(1:1:end-1,:),vertices_A(end,:));
-    [rec_B_total,rec_B_plot_total] = build_OBB(vertices_B(1:1:end-1,:),vertices_B(end,:));
-    
-    %color = 'r';
-    
     
     %%%%%%%% build the big sphere for the object
-    flag = OBB_polygon(vertices_A,vertices_B,num_A,num_B);
+    flag = sphere_polygon_b(vertices_A,vertices_B,num_A,num_B);
     if flag
         txt = 'collision: true';
     else
         txt = 'collision: false';
     end
-    text(0.0,2.5,txt)
-    %%%%%% plot
-%     if OBB_collision(rec_A_total,rec_B_total)
+    text(0,2,txt)
+    %%%%%%% plot
+%     if sphere_collision(c_A,c_B,r_A,r_B)
 %         color = 'r';
 %     else
 %         color = 'g';
 %     end
-% %     color = 'r';
-%     plot(rec_A_plot_total(:,1),rec_A_plot_total(:,2),color,'Linewidth',2);  % plot
-%     %hold on;
-%     plot(rec_B_plot_total(:,1),rec_B_plot_total(:,2),color,'Linewidth',2);
-
+%     color = 'r'
+%     viscircles(c_A,r_A,'color',color);
+%     viscircles(c_B,r_B,'color',color);
     
     % guarantee consistent height
     xlim([-2.0,3.0]);
     ylim([-2.0,3.0]);
-    
     %%%%translation
     %vertices_B = vertices_B + [0.01,0.01];
     
     
     %%%%%%% rotation around specific point
-    %vertices_B = vertices_B - [0.5,0.5];
-    %vertices_B = (R*(vertices_B'))'+[0.5,0.5];
+    %vertices_B = vertices_B - [1.0,1.0];
+    %vertices_B = (R*(vertices_B'))'+[1.0,1.0];
     
     
     %%%%%% rotation around origin
-    vertices_B = (R*(vertices_B'))';
+    %vertices_B = (R*(vertices_B'))'
     
+    vertices_B = vertices_B*1.015;
+    vertices_B = vertices_B + [0,0.01];
     % capture it
     hold off;
     F(t) = getframe;
