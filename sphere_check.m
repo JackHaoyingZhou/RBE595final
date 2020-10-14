@@ -62,7 +62,7 @@ tMul = sum(T)
 tEnd = toc(tStart)
 
 %%%%%% write frames to file
-writerObj = VideoWriter('test2.avi');
-open(writerObj);
-writeVideo(writerObj, F)
-close(writerObj);
+% writerObj = VideoWriter('test2.avi');
+% open(writerObj);
+% writeVideo(writerObj, F)
+% close(writerObj);
