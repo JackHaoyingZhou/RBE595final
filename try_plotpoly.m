@@ -50,7 +50,8 @@ load('test1.mat');
 %vertices_B = vertices_B + [0.01,0.01];
 
 tStart = tic;
-time = 100;
+time = 5;
+d = 1.0/time;
 theta = 2*pi/time;
 R = [cos(theta),-sin(theta);sin(theta),cos(theta)];
 figure(1)
@@ -70,6 +71,7 @@ for t = 1:time
     
     %%%%%%%% build the big sphere for the object
     flag = line_polygon(vertices_A,vertices_B,num_A,num_B);
+    flag_1 = sphere_polygon(vertices_A,vertices_B,num_A,num_B);
     if flag
         txt = 'collision: true';
     else
@@ -93,7 +95,7 @@ for t = 1:time
     ylim([-2.0,3.0]);
     
     %%%%translation
-    %vertices_B = vertices_B + [0.01,0.01];
+    vertices_B = vertices_B + [d,d];
     
     
     %%%%%%% rotation around specific point
@@ -102,7 +104,7 @@ for t = 1:time
     
     
     %%%%%% rotation around origin
-    vertices_B = (R*(vertices_B'))';
+    %vertices_B = (R*(vertices_B'))';
     
     % capture it
     hold off;

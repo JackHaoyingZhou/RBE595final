@@ -16,9 +16,10 @@ for i_treeB = 1:num_B
         if flag_intersect
             plot(vec_1(:,1),vec_1(:,2),'color','r','Linewidth',2);
             plot(vec_2(:,1),vec_2(:,2),'color','r','Linewidth',2);
-            disp('collision!');
-            disp(flag_intersect);
+            %disp('collision!');
+            %disp(flag_intersect);
             flag = true;
+            
             %return;
         end
     end

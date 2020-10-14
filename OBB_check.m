@@ -8,9 +8,10 @@ load('test1.mat');
 
 tStart = tic;
 time = 100;
-theta = 2*pi/time;
+d = 1.0/(time-1);
+theta = 2*pi/(time-1);
 R = [cos(theta),-sin(theta);sin(theta),cos(theta)];
-figure(1)
+figure('units','normalized','outerposition',[0 0 1 1])
 T = zeros(1,time);
 for t = 1:time
     tic
@@ -19,8 +20,8 @@ for t = 1:time
     grid on;
     plot(vertices_B(:,1),vertices_B(:,2),'k','Linewidth',2);
     
-    [rec_A_total,rec_A_plot_total] = build_OBB(vertices_A(1:1:end-1,:),vertices_A(end,:));
-    [rec_B_total,rec_B_plot_total] = build_OBB(vertices_B(1:1:end-1,:),vertices_B(end,:));
+    %[rec_A_total,rec_A_plot_total] = build_OBB(vertices_A);
+    %[rec_B_total,rec_B_plot_total] = build_OBB(vertices_B);
     
     %color = 'r';
     
@@ -50,7 +51,7 @@ for t = 1:time
     ylim([-2.0,3.0]);
     
     %%%%translation
-    %vertices_B = vertices_B + [0.01,0.01];
+    vertices_B = vertices_B + [d,d];
     
     
     %%%%%%% rotation around specific point
@@ -59,7 +60,7 @@ for t = 1:time
     
     
     %%%%%% rotation around origin
-    vertices_B = (R*(vertices_B'))';
+    %vertices_B = (R*(vertices_B'))';
     
     % capture it
     hold off;

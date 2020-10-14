@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-load('test4.mat');
+load('test1.mat');
 
 %vertices_B = vertices_B + [0.01,0.01];
 
@@ -20,8 +20,8 @@ for t = 1:time
     plot(vertices_B(:,1),vertices_B(:,2),'k','Linewidth',2);
     
     
-    [rec_A_total,rec_A_plot_total] = build_AABB(max(vertices_A),min(vertices_A));
-    [rec_B_total,rec_B_plot_total] = build_AABB(max(vertices_B),min(vertices_B));
+    %[rec_A_total,rec_A_plot_total] = build_AABB(vertices_A);
+    %[rec_B_total,rec_B_plot_total] = build_AABB(vertices_B);
     
     %color = 'r';
     
@@ -51,12 +51,12 @@ for t = 1:time
     ylim([-2.0,3.0]);
     
     %%%%translation
-    vertices_B = vertices_B + [0.01,0.01];
+    %vertices_B = vertices_B + [0.01,0.01];
     
     
     %%%%%%% rotation around specific point
-    %vertices_B = vertices_B - [0.5,0.5];
-    %vertices_B = (R*(vertices_B'))'+[0.5,0.5];
+    vertices_B = vertices_B - [0.5,0.5];
+    vertices_B = (R*(vertices_B'))'+[0.5,0.5];
     
     
     %%%%%% rotation around origin

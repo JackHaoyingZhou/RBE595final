@@ -1,13 +1,9 @@
-function [rec,rec_plot] = build_AABB(pointA, pointB)
+function [rec,rec_plot] = build_AABB(vertices)
 tol = 1e-9;
-if isequal(pointA,pointB)
-    disp('error!')
-end
 rec = zeros(4,2);
 rec_plot = zeros(5,2);
-point_matrix = [pointA;pointB];
-rec_max = max(point_matrix);
-rec_min = min(point_matrix);
+rec_max = max(vertices);
+rec_min = min(vertices);
 if abs(rec_max(1) - rec_min(1)) < tol
     rec_max(1) = rec_max(1) + 0.01;
     rec_min(1) = rec_min(1) - 0.01;

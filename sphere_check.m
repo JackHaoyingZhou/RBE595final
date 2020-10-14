@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-load('test3.mat');
+load('test1.mat');
 % v_A = [vertices_A; vertices_A(1,:)];
 % v_B = [vertices_B; vertices_B(1,:)];
 % num_A = size(vertices_A,1);
