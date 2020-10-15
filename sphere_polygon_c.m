@@ -1,18 +1,31 @@
-function [flag,i_test] = AABB_polygon_c(vertices_A,vertices_B)
+function [flag, i_test] = sphere_polygon_c(vertices_A,vertices_B)
 flag = false;
-[rec_A,~] = build_AABB(vertices_A);
-[rec_B,~] = build_AABB(vertices_B);
+i_test = 0;
+[r_A,c_A] = build_sphere(vertices_A);
+[r_B,c_B] = build_sphere(vertices_B);
+% num_A = size(vertices_A,1);
+% num_B = size(vertices_B,1);
+% v_1 = vertices_A;
+% v_2 = vertices_B;
+% num_iter1 = ceil(log2(num_A))-2;
+% num_iter2 = ceil(log2(num_B))-2;
+% idx_1 = size(v_1,1);
+% idx_2 = size(v_2,1);
+% leaf_A = cell(2^num_iter1,1);
+% leaf_B = cell(2^num_iter2,1);
 tree_A = build_tree(vertices_A);
 tree_B = build_tree(vertices_B);
-i_test = 0;
+% i_iterA = size(tree_A,2);
+% i_iterB = size(tree_B,2);
 
-if AABB_collision(rec_A,rec_B)
-    leaf_A = AABB_check_cell(tree_B,vertices_A);
+if sphere_collision(c_A,c_B,r_A,r_B)
+    leaf_A = sphere_check_cell(tree_B,vertices_A);
+    %isempty(leaf_A)
     if ~isempty(leaf_A)
         for i_A = 1:size(leaf_A,1)
-            leaf_B = AABB_check_cell(tree_A,leaf_A{i_A});
+            leaf_B = sphere_check_cell(tree_A,leaf_A{i_A});
             if ~isempty(leaf_B)
-                [flag1,i_t] = primitive_test(leaf_A,leaf_B);
+                [flag1, i_t] = primitive_test(leaf_A,leaf_B);
                 i_test = i_test + i_t;
                 if flag1
                     flag = true;

@@ -22,8 +22,6 @@ if AABB_collision(rec_A_total,rec_B_total)
                     %disp('collision!');
                     %disp(AABB_collision(rec_1,rec_2));
                     flag = true;
-                    
-                    
                     %return;
                 end
             end

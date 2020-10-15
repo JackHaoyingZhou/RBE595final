@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-load('test6.mat');
+load('test3.mat');
 
 %vertices_B = vertices_B + [0.01,0.01];
 
@@ -28,7 +28,9 @@ for t = 1:time
     
     
     %%%%%%%% build the big sphere for the object
-    flag = OBB_polygon_b(vertices_A,vertices_B,num_A,num_B);
+    %flag = OBB_polygon_b(vertices_A,vertices_B,num_A,num_B);
+    [flag, i_test] = OBB_polygon_c(vertices_A,vertices_B);
+    i_test
     if flag
         txt = 'collision: true';
     else
