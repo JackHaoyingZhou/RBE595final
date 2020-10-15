@@ -1,5 +1,7 @@
-function [flag]=line_polygon(vertices_A,vertices_B,num_A,num_B)
+function [flag]=line_test(vertices_A,vertices_B)
 flag = false;
+num_A = size(vertices_A,1) - 1;
+num_B = size(vertices_B,1) - 1;
 mod = py.importlib.import_module('linesegment_collision');
 
 

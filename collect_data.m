@@ -15,4 +15,4 @@ hold on;
 grid on;
 plot(vertices_B(:,1),vertices_B(:,2),'k','Linewidth',2);
 
-save('test6','num_A','num_B','vertices_A','vertices_B')
+save('test10','num_A','num_B','vertices_A','vertices_B')

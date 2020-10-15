@@ -27,5 +27,40 @@
 % 
 % plot([0,norm_vec(1)],[0,norm_vec(2)],'r');
 
+%for k = 1:5
+%     disp(k)
+% end
+% 
+% for i = 1:5
+%     for j = 1:5
+%         if i>3
+%             disp(i)
+%             return;
+%         end
+%     end
+% end
 
-S = 
+plot(vertices_A(:,1),vertices_A(:,2),'b','Linewidth',2);  % plot
+hold on;
+grid on;
+plot(vertices_B(:,1),vertices_B(:,2),'k','Linewidth',2);
+
+points_1 = dt_A.X;
+points_2 = dt_B.X;
+for i = 1:size(dt_A.Triangulation,1)
+    idx = dt_A.Triangulation(i,:);
+    point_A = points_1(idx(1),:);
+    point_B = points_1(idx(2),:);
+    point_C = points_1(idx(3),:);
+    pt_mtx = [point_A;point_B;point_C;point_A];
+    plot(pt_mtx(:,1),pt_mtx(:,2),'r','Linewidth',2);
+end
+
+for j = 1:size(dt_B.Triangulation,1)
+    idy = dt_B.Triangulation(j,:);
+    point_A1 = points_2(idy(1),:);
+    point_B1 = points_2(idy(2),:);
+    point_C1 = points_2(idy(3),:);
+    pt_mtx1 = [point_A1;point_B1;point_C1;point_A1];
+    plot(pt_mtx1(:,1),pt_mtx1(:,2),'g','Linewidth',2);
+end
