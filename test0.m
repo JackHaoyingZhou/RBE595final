@@ -27,5 +27,3 @@
 % 
 % plot([0,norm_vec(1)],[0,norm_vec(2)],'r');
 
-
-S = 
