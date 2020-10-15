@@ -20,6 +20,8 @@ v_4{1} = vertices_B;
 i_iter = 1;
 
 if AABB_collision(rec_A,rec_B)
+    plot(rec_A(:,1),rec_A(:,2),'color','g','Linewidth',2);
+    plot(rec_B(:,1),rec_B(:,2),'color','g','Linewidth',2);
     while i_iter > 0 && i_iter < 2^num_iter 
         flag = false;
         ind_A = ceil(size(v_1,1)/2);
@@ -155,5 +157,4 @@ if flag
     plot(rec_1(:,1),rec_1(:,2),'color','r','Linewidth',2);
     plot(rec_2(:,1),rec_2(:,2),'color','r','Linewidth',2);
 end
-
 end

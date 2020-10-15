@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-load('test6.mat');
+load('test1.mat');
 
 %vertices_B = vertices_B + [0.01,0.01];
 
@@ -52,7 +52,7 @@ for t = 1:time
     ylim([-2.0,3.0]);
     
     %%%%translation
-    %vertices_B = vertices_B + [d,d];
+    vertices_B = vertices_B + [d,d];
     
     
     %%%%%%% rotation around specific point
@@ -61,7 +61,7 @@ for t = 1:time
     
     
     %%%%%% rotation around origin
-    vertices_B = (R*(vertices_B'))';
+    %vertices_B = (R*(vertices_B'))';
     
     % capture it
     hold off;
