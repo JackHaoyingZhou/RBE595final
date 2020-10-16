@@ -1,34 +1,49 @@
-function [flag] = sphere_polygon(vertices_A,vertices_B,num_A,num_B)
+function [flag, i_ptest, i_btest ,t_p] = sphere_polygon(vertices_A,vertices_B)
+%%%%% initialize
+flag = false;
+i_ptest = 0;
 [c_A,r_A] = build_sphere(vertices_A);
 [c_B,r_B] = build_sphere(vertices_B);
-flag = false;
+tree_A = build_tree(vertices_A);
+tree_B = build_tree(vertices_B);
+i_btest = 0;
+t_p = 0;
 
 if sphere_collision(c_A,c_B,r_A,r_B)
-    for i_treeB = 1:num_B
-        point_1 = vertices_B(i_treeB,:);
-        point_2 = vertices_B(i_treeB+1,:);
-        [c_ssphere1,r_ssphere1] = build_sphere([point_1;point_2]);
-        if sphere_collision(c_A,c_ssphere1,r_A,r_ssphere1)
-            for i_treeA = 1:num_A
-                point_3 = vertices_A(i_treeA,:);
-                point_4 = vertices_A(i_treeA+1,:);
-                [c_ssphere2,r_ssphere2] = build_sphere([point_3;point_4]);
-                %tic 
-                %flag1 = sphere_collision(c_ssphere1,c_ssphere2,r_ssphere1,r_ssphere2);
-                %toc
-                if sphere_collision(c_ssphere1,c_ssphere2,r_ssphere1,r_ssphere2)
-                    viscircles(c_ssphere1,r_ssphere1,'color','r');
-                    viscircles(c_ssphere2,r_ssphere2,'color','r');
-                    %disp('collision!');
-                    %disp(sphere_collision(c_ssphere1,c_ssphere2,r_ssphere1,r_ssphere2));
-                    flag = true;
+    
+    %%%% BVTT1
+    [leaf_A, i_1] = sphere_check_cell(tree_B,vertices_A);
+    i_btest = i_btest + i_1;
+    
+    if ~isempty(leaf_A)
+        for i_A = 1:size(leaf_A,1)
+            
+            %%%%% BVTT2
+            [leaf_B, i_2] = sphere_check_cell(tree_A,leaf_A{i_A});
+            i_btest = i_btest + i_2;
+            if ~isempty(leaf_B)
+                for i_B = 1:size(leaf_B,1)
+                    tic
                     
-                    %return;
+                    %%%% primitive tests
+                    flag1 = primitive_test(leaf_A{i_A},leaf_B{i_B});
+                    T_p = toc;
+                    t_p = t_p + T_p;
+                    i_ptest = i_ptest + 1;
+                    
+                    if flag1
+                        flag = true;
+                        
+                        %%% plot leaf node
+                        [c_1,r_1] = build_sphere(leaf_A{i_A});
+                        [c_2,r_2] = build_sphere(leaf_B{i_B});
+                        viscircles(c_1,r_1,'color','y');
+                        viscircles(c_2,r_2,'color','y');
+                        return;
+                    end
                 end
             end
         end
     end
 end
-
-
-end
+end  

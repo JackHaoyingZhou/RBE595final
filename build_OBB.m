@@ -18,11 +18,11 @@ else
     x_t = vertices(:,1);
     y_t = vertices(:,2);
     cov_mtx = cov(x_t,y_t);
-    [V,~] = eig(cov_mtx);
+    [V,D] = eig(cov_mtx);
     vertices = (V*(vertices'))';
-    [rec,rec_plot] = build_AABB(vertices);
-    rec = (V*(rec)')';
-    rec_plot = (V*(rec_plot)')';
+    [rec_1,rec_plot_1] = build_AABB(vertices);
+    rec = (V\(rec_1)')';
+    rec_plot = (V\(rec_plot_1)')';
 end
 
 end

@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-load('test2.mat');
+load('test6.mat');
 % prompt = 'input number of edges for two polygon as [a,b]:\n';
 % s = input(prompt);
 % num_A = s(1);
@@ -17,61 +17,69 @@ load('test2.mat');
 % num_A = size(vertices_A,1);
 % num_B = size(vertices_B,1);
 
-tStart = tic;
-time = 100;
+time = 1;
 d = 1.0/time;
 figure(1)
 T = zeros(1,time);
 theta = 2*pi/time;
 R = [cos(theta),-sin(theta);sin(theta),cos(theta)];
+T_p = 0;
+I_ptest = 0;
+I_btest = 0;
 for t = 1:time
-    tic
-    plot(vertices_A(:,1),vertices_A(:,2),'b','Linewidth',2);  % plot
+    % plot polygon*
+    plot(vertices_A(:,1),vertices_A(:,2),'b','Linewidth',2);
     hold on;
     grid on;
     plot(vertices_B(:,1),vertices_B(:,2),'k','Linewidth',2);
     
     
-    %%%%%%%% build the big sphere for the object
-    %flag = sphere_polygon(vertices_A,vertices_B,num_A,num_B);
-    [flag, i_test] = sphere_polygon_c(vertices_A,vertices_B);
-    i_test
+    %%%%%%%% main program
+    tStart = tic;
+    [flag, i_ptest,i_btest, t_p] = sphere_polygon(vertices_A,vertices_B);
+    T(t) = toc(tStart);
+    
+    
+    T_p = T_p + t_p;
+    I_ptest = I_ptest + i_ptest;
+    I_btest = I_btest + i_btest;
     if flag
         txt = 'collision: true';
     else
         txt = 'collision: false';
     end
     text(0,2,txt)
-    %%%%%%% plot
-%     if sphere_collision(c_A,c_B,r_A,r_B)
-%         color = 'r';
-%     else
-%         color = 'g';
-%     end
-%     viscircles(c_A,r_A,'color',color);
-%     viscircles(c_B,r_B,'color',color);
     
     % guarantee consistent height
     xlim([-2.0,3.0]);
     ylim([-2.0,3.0]);
+    
+    
     %%%%translation
     %vertices_B = vertices_B + [d,d];
     
     
-    %%%%%%% rotation around specific point
-    vertices_B = vertices_B - [0.5,0.5];
-    vertices_B = (R*(vertices_B'))'+[0.5,0.5];
+    %%%% rotation around specific point
+    %vertices_B = vertices_B - [0.5,0.5];
+    %vertices_B = (R*(vertices_B'))'+[0.5,0.5];
     
     
     %%%%%% rotation around origin
     %vertices_B = (R*(vertices_B'))';
-    % capture it
+    
+    %%%%%%% capture frame
     hold off;
     F(t) = getframe;
-    T(t) = toc;
 end
-tMul = sum(T)
-tEnd = toc(tStart)
+tMul = sum(T);
+
+disp('Time for primitive test (s)')
+disp(T_p)
+disp('Number of BV tests')
+disp(I_btest)
+disp('Total time (s)')
+disp(tMul)
+
 
 %%%%%% write frames to file
 % writerObj = VideoWriter('test2.avi');

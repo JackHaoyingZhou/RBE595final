@@ -2,48 +2,50 @@ clear all
 close all
 clc
 
-load('test1.mat');
+%load('test3.mat');
+prompt = 'input number of edges for two polygon as [a,b]:\n';
+s = input(prompt);
+num_A = s(1);
+num_B = s(2);
+%disp(s)
 
 %vertices_B = vertices_B + [0.01,0.01];
-
-tStart = tic;
 time = 100;
+d = 1.0/time;
 theta = 2*pi/time;
 R = [cos(theta),-sin(theta);sin(theta),cos(theta)];
 figure(1)
 T = zeros(1,time);
+T_p = 0;
+I_ptest = 0;
+I_btest = 0;
+
 for t = 1:time
-    tic
-    plot(vertices_A(:,1),vertices_A(:,2),'b','Linewidth',2);  % plot
+    [x_A,y_A,dt_A] = simple_polygon(num_A);
+    vertices_A = [x_A,y_A];
+    [x_B,y_B,dt_B] = simple_polygon(num_B);
+    vertices_B = [x_B,y_B];
+
+    % plot polygon
+    plot(vertices_A(:,1),vertices_A(:,2),'b','Linewidth',2);  
     hold on;
     grid on;
     plot(vertices_B(:,1),vertices_B(:,2),'k','Linewidth',2);
     
+    %%%% main program
+    tStart = tic;
+    [flag, i_ptest,i_btest, t_p] = AABB_polygon(vertices_A,vertices_B);
+    T_p = T_p + t_p;
+    I_ptest = I_ptest + i_ptest;
+    I_btest = I_btest + i_btest;
+    T(t) = toc(tStart);
     
-    %[rec_A_total,rec_A_plot_total] = build_AABB(vertices_A);
-    %[rec_B_total,rec_B_plot_total] = build_AABB(vertices_B);
-    
-    %color = 'r';
-    
-    
-    %%%%%%%% build the big sphere for the object
-    flag = AABB_polygon(vertices_A,vertices_B,num_A,num_B);
     if flag
         txt = 'collision: true';
     else
         txt = 'collision: false';
     end
     text(0.0,2.5,txt)
-    %%%%%% plot
-%     if AABB_collision(rec_A_total,rec_B_total)
-%         color = 'r';
-%     else
-%         color = 'g';
-%     end
-    
-%     plot(rec_A_plot_total(:,1),rec_A_plot_total(:,2),color,'Linewidth',2);  % plot
-%     %hold on;
-%     plot(rec_B_plot_total(:,1),rec_B_plot_total(:,2),color,'Linewidth',2);
 
     
     % guarantee consistent height
@@ -51,13 +53,12 @@ for t = 1:time
     ylim([-2.0,3.0]);
     
     %%%%translation
-    %vertices_B = vertices_B + [0.01,0.01];
+    %vertices_B = vertices_B + [d,d];
     
     
     %%%%%%% rotation around specific point
-    vertices_B = vertices_B - [0.5,0.5];
-    vertices_B = (R*(vertices_B'))'+[0.5,0.5];
-    
+    %vertices_B = vertices_B - [0.5,0.5];
+    %vertices_B = (R*(vertices_B'))'+[0.5,0.5];
     
     %%%%%% rotation around origin
     %vertices_B = (R*(vertices_B'))';
@@ -65,10 +66,15 @@ for t = 1:time
     % capture it
     hold off;
     F(t) = getframe;
-    T(t) = toc;
 end
-tMul = sum(T)
-tEnd = toc(tStart)
+tMul = sum(T);
+
+disp('Time for primitive test (s)')
+disp(T_p)
+disp('Number of BV tests')
+disp(I_btest)
+disp('Total time (s)')
+disp(tMul)
 
 %%%%%% write frames to file
 % writerObj = VideoWriter('test2.avi');

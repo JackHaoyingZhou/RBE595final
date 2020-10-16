@@ -26,7 +26,6 @@ for i_treeB = 1:num_B
             %disp('collision!');
             %disp(flag_intersect);
             flag = true;
-            
             return;
         end
     end

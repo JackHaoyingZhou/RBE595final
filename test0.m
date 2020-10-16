@@ -43,7 +43,18 @@ clear all;
 close all;
 clc;
 
-load('test12.mat')
+%load('test12.mat')
+
+prompt = 'input number of edges for two polygon as [a,b]:\n';
+s = input(prompt);
+num_A = s(1);
+num_B = s(2);
+%disp(s)
+[x_A,y_A,dt_A] = simple_polygon(num_A);
+vertices_A = [x_A,y_A];
+[x_B,y_B,dt_B] = simple_polygon(num_B);
+vertices_B = [x_B,y_B];
+
 vertices_B = vertices_B + [1,1];
 
 plot(vertices_A(:,1),vertices_A(:,2),'b','Linewidth',2);  % plot

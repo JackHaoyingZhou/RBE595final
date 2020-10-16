@@ -8,7 +8,9 @@ else
     flag = AABB_collision(rec_1,rec_2);
     
     %%%%%% plot
-    plot(rec_plot1(:,1),rec_plot1(:,2),'color','g','Linewidth',2);
-    plot(rec_plot2(:,1),rec_plot2(:,2),'color','g','Linewidth',2);
+    if flag
+        plot(rec_plot1(:,1),rec_plot1(:,2),'color','g','Linewidth',2);
+        plot(rec_plot2(:,1),rec_plot2(:,2),'color','g','Linewidth',2);
+    end
 end
 end

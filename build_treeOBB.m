@@ -1,8 +1,8 @@
-function [tree_struct] = build_tree(vertices)
+function [tree_struct] = build_treeOBB(vertices)
 
 %%% initialize
 num_v = size(vertices,1);
-no_iter = ceil(log2(num_v)) - 1;
+no_iter = ceil(log2(num_v)) - 2;
 tree_struct = cell(2^no_iter,no_iter+1);
 tree_struct{1,1} = vertices;
 idx_v = num_v;
