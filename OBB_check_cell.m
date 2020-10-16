@@ -32,7 +32,6 @@ for i_2 = 1:size(cell_1,1)
     if ~isempty(cell_1{i_2,end})
         cell_2{i_iter,1} = cell_1{i_2,end};
         i_iter = i_iter + 1;
-        %continue;
     end
 end
 

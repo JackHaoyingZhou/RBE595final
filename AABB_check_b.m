@@ -2,7 +2,17 @@ clear all
 close all
 clc
 
-load('test7.mat');
+load('test2.mat');
+% prompt = 'input number of edges for two polygon as [a,b]:\n';
+% s = input(prompt);
+% num_A = s(1);
+% num_B = s(2);
+% %disp(s)
+% [x_A,y_A,dt_A] = simple_polygon(num_A);
+% vertices_A = [x_A,y_A];
+% [x_B,y_B,dt_B] = simple_polygon(num_B);
+% vertices_B = [x_B,y_B];
+
 
 %vertices_B = vertices_B + [0.01,0.01];
 
@@ -58,12 +68,12 @@ for t = 1:time
     
     
     %%%%%%% rotation around specific point
-    %vertices_B = vertices_B - [0.5,0.5];
-    %vertices_B = (R*(vertices_B'))'+[0.5,0.5];
+    vertices_B = vertices_B - [0.5,0.5];
+    vertices_B = (R*(vertices_B'))'+[0.5,0.5];
     
     
     %%%%%% rotation around origin
-    vertices_B = (R*(vertices_B'))';
+    %vertices_B = (R*(vertices_B'))';
     
     % capture it
     hold off;

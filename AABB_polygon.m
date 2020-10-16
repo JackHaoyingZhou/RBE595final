@@ -1,7 +1,8 @@
-function [flag] = AABB_polygon(vertices_A,vertices_B,num_A,num_B)
+function [flag, i_test] = AABB_polygon(vertices_A,vertices_B,num_A,num_B)
 [rec_A_total,~] = build_AABB(vertices_A);
 [rec_B_total,~] = build_AABB(vertices_B);
 flag = false;
+i_test = 0;
 
 if AABB_collision(rec_A_total,rec_B_total)
     for i_treeB = 1:num_B
@@ -22,6 +23,7 @@ if AABB_collision(rec_A_total,rec_B_total)
                     %disp('collision!');
                     %disp(AABB_collision(rec_1,rec_2));
                     flag = true;
+                    i_test = i_test + 1;
                     %return;
                 end
             end

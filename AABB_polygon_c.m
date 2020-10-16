@@ -12,7 +12,7 @@ if AABB_collision(rec_A,rec_B)
         for i_A = 1:size(leaf_A,1)
             leaf_B = AABB_check_cell(tree_A,leaf_A{i_A});
             if ~isempty(leaf_B)
-                [flag1,i_t] = primitive_test(leaf_A,leaf_B);
+                [flag1,i_t] = primitive_test(leaf_A,leaf_B,'line');
                 i_test = i_test + i_t;
                 if flag1
                     flag = true;

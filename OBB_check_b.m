@@ -2,18 +2,29 @@ clear all
 close all
 clc
 
-load('test3.mat');
+load('test2.mat');
+
+% prompt = 'input number of edges for two polygon as [a,b]:\n';
+% s = input(prompt);
+% num_A = s(1);
+% num_B = s(2);
+% %disp(s)
+% [x_A,y_A,dt_A] = simple_polygon(num_A);
+% vertices_A = [x_A,y_A];
+% [x_B,y_B,dt_B] = simple_polygon(num_B);
+% vertices_B = [x_B,y_B];
 
 %vertices_B = vertices_B + [0.01,0.01];
 
 tStart = tic;
 time = 100;
 d = 1.0/(time-1);
-theta = 2*pi/(time-1);
+theta = 0.5*2*pi/(time-1);
 R = [cos(theta),-sin(theta);sin(theta),cos(theta)];
 %figure('units','normalized','outerposition',[0 0 1 1])
 figure(1)
 T = zeros(1,time);
+%vertices_B = vertices_B*0.5;
 for t = 1:time
     tic
     plot(vertices_A(:,1),vertices_A(:,2),'b','Linewidth',2);  % plot
@@ -54,16 +65,16 @@ for t = 1:time
     ylim([-2.0,3.0]);
     
     %%%%translation
-    %vertices_B = vertices_B + [d,d];
+    %vertices_B = vertices_B + [-d,d];
     
     
     %%%%%%% rotation around specific point
-    %vertices_B = vertices_B - [0.5,0.5];
-    %vertices_B = (R*(vertices_B'))'+[0.5,0.5];
+    vertices_B = vertices_B - [0.5,0.5];
+    vertices_B = (R*(vertices_B'))'+[0.5,0.5];
     
     
     %%%%%% rotation around origin
-    vertices_B = (R*(vertices_B'))';
+    %vertices_B = (R*(vertices_B'))';
     
     % capture it
     hold off;

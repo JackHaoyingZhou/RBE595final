@@ -2,7 +2,16 @@ clear all
 close all
 clc
 
-load('test1.mat');
+load('test2.mat');
+% prompt = 'input number of edges for two polygon as [a,b]:\n';
+% s = input(prompt);
+% num_A = s(1);
+% num_B = s(2);
+% %disp(s)
+% [x_A,y_A,dt_A] = simple_polygon(num_A);
+% vertices_A = [x_A,y_A];
+% [x_B,y_B,dt_B] = simple_polygon(num_B);
+% vertices_B = [x_B,y_B];
 % v_A = [vertices_A; vertices_A(1,:)];
 % v_B = [vertices_B; vertices_B(1,:)];
 % num_A = size(vertices_A,1);
@@ -10,6 +19,7 @@ load('test1.mat');
 
 tStart = tic;
 time = 100;
+d = 1.0/time;
 figure(1)
 T = zeros(1,time);
 theta = 2*pi/time;
@@ -45,16 +55,16 @@ for t = 1:time
     xlim([-2.0,3.0]);
     ylim([-2.0,3.0]);
     %%%%translation
-    %vertices_B = vertices_B + [0.01,0.01];
+    %vertices_B = vertices_B + [d,d];
     
     
     %%%%%%% rotation around specific point
-    %vertices_B = vertices_B - [0.8,0.8];
-    %vertices_B = (R*(vertices_B'))'+[0.8,0.8];
+    vertices_B = vertices_B - [0.5,0.5];
+    vertices_B = (R*(vertices_B'))'+[0.5,0.5];
     
     
     %%%%%% rotation around origin
-    vertices_B = (R*(vertices_B'))'
+    %vertices_B = (R*(vertices_B'))';
     % capture it
     hold off;
     F(t) = getframe;
