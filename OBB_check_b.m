@@ -17,8 +17,8 @@ load('test6.mat');
 %vertices_B = vertices_B + [0.01,0.01];
 
 
-time = 1;
-d = 1.0/(time-1);
+time = 100;
+d = 0.5*1.0/(time-1);
 theta = 0.5*2*pi/(time-1);
 R = [cos(theta),-sin(theta);sin(theta),cos(theta)];
 %figure('units','normalized','outerposition',[0 0 1 1])
@@ -57,12 +57,12 @@ for t = 1:time
     ylim([-2.0,3.0]);
     
     %%%%translation
-    %vertices_B = vertices_B + [d,0];
+    %vertices_B = vertices_B + [d,d];
     
     
     %%%%%%% rotation around specific point
-    %vertices_B = vertices_B - [0.5,0.5];
-    %vertices_B = (R*(vertices_B'))'+[0.5,0.5];
+    vertices_B = vertices_B - [0.5,0.5];
+    vertices_B = (R*(vertices_B'))'+[0.5,0.5];
     
     
     %%%%%% rotation around origin

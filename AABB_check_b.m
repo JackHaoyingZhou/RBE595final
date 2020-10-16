@@ -15,8 +15,8 @@ load('test6.mat');
 
 
 %vertices_B = vertices_B + [0.01,0.01];
-time = 1;
-d = 1.0/time;
+time = 100;
+d = 0.5*1.0/time;
 theta = 2*pi/time;
 R = [cos(theta),-sin(theta);sin(theta),cos(theta)];
 figure(1)
@@ -68,8 +68,8 @@ for t = 1:time
     
     
     %%%%%%% rotation around specific point
-    % vertices_B = vertices_B - [0.5,0.5];
-    % vertices_B = (R*(vertices_B'))'+[0.5,0.5];
+    vertices_B = vertices_B - [0.5,0.5];
+    vertices_B = (R*(vertices_B'))'+[0.5,0.5];
     
     %%%%%% rotation around origin
     %vertices_B = (R*(vertices_B'))';
